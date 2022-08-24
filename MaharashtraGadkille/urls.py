@@ -20,5 +20,9 @@ from gadkille import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('',views.index),
+    path('',views.index,name="index"),
+    path('about/',views.about,name="about"),
+    path('destination/',views.destination,name="destination"),
+    path('gallery/',views.gallery,name="gallery"),
+    path('contact/',views.contact,name="contact"),
 ]

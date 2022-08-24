@@ -37,12 +37,12 @@
 
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-	          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-	          <li class="nav-item"><a href="destination.html" class="nav-link">Destination</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-	          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-	          <li class="nav-item cta"><a href="#" class="nav-link">Book Now</a></li>
+	          <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+	          <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	          <li class="nav-item"><a href="{% url 'destination' %}" class="nav-link">Destination</a></li>
+	          <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+	          <li class="nav-item cta"><a href="{% url 'destination' %}" class="nav-link">Book Now</a></li>
 
 	        </ul>
 	      </div>
@@ -51,7 +51,7 @@
     <!-- END nav -->
 
 
-    {% block content %}{% endblock content %}
+    {% block content %} {% endblock content %}
 
 
     <footer class="ftco-footer bg-bottom" style="background-image: url(images/footer-bg.jpg);">
