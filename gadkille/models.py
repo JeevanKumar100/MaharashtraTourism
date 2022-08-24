@@ -24,9 +24,9 @@ class UpcomingTreks(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=30)
     location = models.CharField(max_length=50)
-    rate = models.PositiveSmallIntegerField()
-    day = models.PositiveSmallIntegerField()
-    night = models.PositiveSmallIntegerField()
+    rate = models.PositiveIntegerField()
+    day = models.PositiveIntegerField()
+    night = models.PositiveIntegerField()
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.title
@@ -38,6 +38,37 @@ def post_del_result(sender, instance, *args, **kwargs):
     except:
         pass
     
+
+class BestClick(models.Model):
+    title = models.CharField(max_length=50)
+    description = models.TextField()
+    successfultours = models.PositiveIntegerField()
+    happytourist = models.PositiveIntegerField()
+    placesexplored = models.PositiveIntegerField()
+    image = models.ImageField(upload_to='gadkille/images/')
+
+@receiver(post_delete, sender=BestClick)
+def post_del_result(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+    except:
+        pass
+
+
+class SuccessfulTreks(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=20)
+    trekcount = models.IntegerField()
+    image = models.ImageField(upload_to='webapp/images/')
+    def __str__(self):
+        return self.title
+
+@receiver(post_delete, sender=SuccessfulTreks)
+def post_del_result(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+    except:
+        pass
 
 class AboutBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
@@ -75,13 +106,7 @@ def post_del_result(sender, instance, *args, **kwargs):
 
 # ---------------------------
 
-# class SuccessfulTreks(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     title = models.CharField(max_length=20)
-#     trekcount = models.IntegerField()
-#     image = models.ImageField(upload_to='webapp/images/')
-#     def __str__(self):
-#         return self.title
+
 
 # class Highlight(models.Model):
 #     title = models.CharField(max_length=20)
@@ -170,12 +195,7 @@ def post_del_result(sender, instance, *args, **kwargs):
 
 
 
-# @receiver(post_delete, sender=SuccessfulTreks)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
+
 
 # @receiver(post_delete, sender=SuccessfulTreksBackground)
 # def post_del_result(sender, instance, *args, **kwargs):
