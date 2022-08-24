@@ -53,25 +53,25 @@
   </div>
 </section>
 
-{% if BestClick %}{% endif %}
-  <section class="ftco-counter img" id="section-counter">
+{% if BestClick is not none %}
+    <section class="ftco-counter img" id="section-counter">
       <div class="container">
           <div class="row d-flex">
               <div class="col-md-6 d-flex">
-                  <div class="img d-flex align-self-stretch" style="background-image:url(images/about.jpg);"></div>
+                  <div class="img d-flex align-self-stretch" style="background-image:url({{bestclick.image.url}});"></div>
               </div>
               <div class="col-md-6 pl-md-5 py-5">
                   <div class="row justify-content-start pb-3">
                 <div class="col-md-12 heading-section ftco-animate">
-                  <h2 class="mb-4">Make Your Tour Memorable and Safe With Us</h2>
-                  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                  <h2 class="mb-4">{{bestclick.title}}</h2>
+                  <p>{{bestclick.description}}</p>
                 </div>
               </div>
                   <div class="row">
                 <div class="col-md-4 justify-content-center counter-wrap ftco-animate">
                   <div class="block-18 text-center mb-4">
                     <div class="text">
-                      <strong class="number" data-number="300">0</strong>
+                      <strong class="number" data-number="{{bestclick.successfultours}}">0</strong>
                       <span>Successful Tours</span>
                     </div>
                   </div>
@@ -79,7 +79,7 @@
                 <div class="col-md-4 justify-content-center counter-wrap ftco-animate">
                   <div class="block-18 text-center mb-4">
                     <div class="text">
-                      <strong class="number" data-number="24000">0</strong>
+                      <strong class="number" data-number="{{bestclick.happytourist}}">0</strong>
                       <span>Happy Tourist</span>
                     </div>
                   </div>
@@ -87,7 +87,7 @@
                 <div class="col-md-4 justify-content-center counter-wrap ftco-animate">
                   <div class="block-18 text-center mb-4">
                     <div class="text">
-                      <strong class="number" data-number="200">0</strong>
+                      <strong class="number" data-number="{{bestclick.placeexplored}}">0</strong>
                       <span>Place Explored</span>
                     </div>
                   </div>
@@ -98,6 +98,7 @@
       </div>
   </section>
 
+{% endif %}
 
       <section class="ftco-section">
       <div class="container">

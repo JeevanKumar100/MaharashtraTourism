@@ -44,7 +44,7 @@ class BestClick(models.Model):
     description = models.TextField()
     successfultours = models.PositiveIntegerField()
     happytourist = models.PositiveIntegerField()
-    placesexplored = models.PositiveIntegerField()
+    placeexplored = models.PositiveIntegerField()
     image = models.ImageField(upload_to='gadkille/images/')
 
 @receiver(post_delete, sender=BestClick)
