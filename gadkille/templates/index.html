@@ -53,7 +53,7 @@
   </div>
 </section>
 
-{% if BestClick is not none %}
+{% if bestclick is not none %}
     <section class="ftco-counter img" id="section-counter">
       <div class="container">
           <div class="row d-flex">
@@ -108,50 +108,25 @@
         </div>
       </div>
       <div class="row">
+          
+        {% for successfultrek in successfultreks %}
+
           <div class="col-md-3 ftco-animate">
               <div class="project-destination">
-                  <a href="#" class="img" style="background-image: url(images/place-1.jpg);">
+                  <a href="#" class="img" style="background-image: url({{successfultrek.image.url}});">
                       <div class="text">
-                          <h3>Singapore</h3>
-                          <span>8 Tours</span>
+                          <h3>{{successfultrek.title}}</h3>
+                          <span>{{successfultrek.trekcount}}Tours</span>
                       </div>
                   </a>
               </div>
           </div>
-          <div class="col-md-3 ftco-animate">
-              <div class="project-destination">
-                  <a href="#" class="img" style="background-image: url(images/place-2.jpg);">
-                      <div class="text">
-                          <h3>Canada</h3>
-                          <span>2 Tours</span>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="col-md-3 ftco-animate">
-              <div class="project-destination">
-                  <a href="#" class="img" style="background-image: url(images/place-3.jpg);">
-                      <div class="text">
-                          <h3>Thailand</h3>
-                          <span>5 Tours</span>
-                      </div>
-                  </a>
-              </div>
-          </div>
-          <div class="col-md-3 ftco-animate">
-              <div class="project-destination">
-                  <a href="#" class="img" style="background-image: url(images/place-4.jpg);">
-                      <div class="text">
-                          <h3>Autralia</h3>
-                          <span>5 Tours</span>
-                      </div>
-                  </a>
-              </div>
-          </div>
+
+        {% endfor %}
+
       </div>
       </div>
   </section>
-
 
 
   <section class="ftco-section testimony-section bg-bottom" style="background-image: url(images/bg_3.jpg);">
@@ -164,76 +139,25 @@
       <div class="row ftco-animate">
         <div class="col-md-12">
           <div class="carousel-testimony owl-carousel ftco-owl">
+            
+          {% for feedback in feedbacks %}
+
             <div class="item">
               <div class="testimony-wrap py-4">
                 <div class="text">
-                  <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <p class="mb-4">{{feedback.description}}</p>
                   <div class="d-flex align-items-center">
-                      <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
                       <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
+                          <p class="name">{{feedback.name}}</p>
+                          <span class="position">{{feedback.designation}}</span>
                         </div>
                     </div>
                 </div>
               </div>
             </div>
-            <div class="item">
-              <div class="testimony-wrap py-4">
-                <div class="text">
-                  <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <div class="d-flex align-items-center">
-                      <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                      <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="testimony-wrap py-4">
-                <div class="text">
-                  <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <div class="d-flex align-items-center">
-                      <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-                      <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="testimony-wrap py-4">
-                <div class="text">
-                  <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <div class="d-flex align-items-center">
-                      <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                      <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="testimony-wrap py-4">
-                <div class="text">
-                  <p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                  <div class="d-flex align-items-center">
-                      <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                      <div class="pl-3">
-                          <p class="name">Roger Scott</p>
-                          <span class="position">Marketing Manager</span>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            </div>
+
+          {% endfor %}
+
           </div>
         </div>
       </div>

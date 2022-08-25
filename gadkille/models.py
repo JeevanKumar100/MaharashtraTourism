@@ -59,7 +59,7 @@ class SuccessfulTreks(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=20)
     trekcount = models.IntegerField()
-    image = models.ImageField(upload_to='webapp/images/')
+    image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.title
 
@@ -69,6 +69,18 @@ def post_del_result(sender, instance, *args, **kwargs):
         instance.image.delete()
     except:
         pass
+
+
+class FeedBack(models.Model):
+    id = models.AutoField(primary_key=True)
+    description = models.TextField()
+    name = models.CharField(max_length=150)
+    designation = models.CharField(max_length=100)
+    def __str__(self):
+        return self.title
+
+
+
 
 class AboutBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
@@ -103,118 +115,4 @@ def post_del_result(sender, instance, *args, **kwargs):
         pass
 
 
-
-# ---------------------------
-
-
-
-# class Highlight(models.Model):
-#     title = models.CharField(max_length=20)
-#     heading = models.CharField(max_length=50)
-#     detail = models.TextField()
-#     image = models.ImageField(upload_to='webapp/images/')
-#     def __str__(self):
-#         return self.heading
-    
-
-# class AboutUs(models.Model):
-#     title = models.CharField(max_length=40)
-#     heading = models.CharField(max_length=50)
-#     aboutDetail = models.TextField()
-#     def __str__(self):
-#         return self.title
-
-# class SuccessfulTreksBackground(models.Model):
-#     image = models.ImageField(upload_to='webapp/images/')
-#     def __str__(self):
-#         return "SuccessfulTreksBackground"
-
-# class Vimeo(models.Model):
-#     image = models.ImageField(upload_to='webapp/images/')
-#     link = models.URLField()
-#     def __str__(self):
-#         return "Vimeo"  
-
-# class TrendingPost(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     link = models.URLField()
-#     def __str__(self):
-#         return "Trending Post"+str(self.id)
-    
-
-
-# class Testimonial(models.Model):
-#     std_choices = ((3,3),(4,4))
-#     id = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=40)
-#     designation = models.CharField(max_length=50)
-#     star = models.IntegerField(choices=std_choices)
-#     feedback = models.CharField(max_length=150)
-#     def __str__(self):
-#         return self.name  
-
-# class Destination(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     title = models.CharField(max_length=30)
-#     location = models.CharField(max_length=50)
-#     rate = models.PositiveSmallIntegerField()
-#     day = models.PositiveSmallIntegerField()
-#     night = models.PositiveSmallIntegerField()
-#     image = models.ImageField(upload_to='webapp/images/')
-#     def __str__(self):
-#         return self.title
-
-# class Vlog(models.Model):
-#     id = models.AutoField(primary_key=True)
-#     title = models.CharField(max_length=40)
-#     date = models.DateField()
-#     description = models.CharField(max_length=110)
-#     link = models.URLField()
-#     youtubeID = models.CharField(max_length=50)
-#     def __str__(self):
-#         return self.title
-
-
-# class Contact(models.Model):
-#     name = models.CharField(max_length=30)
-#     email = models.EmailField(null=True)
-#     mobile = models.CharField(max_length=10,null=True)
-#     destination = models.CharField(max_length=40)
-#     detail = models.TextField(null=True)
-#     def __str__(self):
-#         return self.destination
-
-
-
-# @receiver(post_delete, sender=Destination)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
-
-
-
-
-
-# @receiver(post_delete, sender=SuccessfulTreksBackground)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
-
-# @receiver(post_delete, sender=Vimeo)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
-
-# @receiver(post_delete, sender=VlogBackground)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
 
