@@ -5,7 +5,7 @@ from gadkille.models import BestClick, FeedBack, HomeBackground, SuccessfulTreks
 
 # Create your views here.
 def index(request):
-    homebackground = HomeBackground.objects.all().first()
+    homebackground = HomeBackground.objects.all()
     bestclick = BestClick.objects.all()
     successfultreks = SuccessfulTreks.objects.all()
     upcomingtreks = UpcomingTreks.objects.all()
