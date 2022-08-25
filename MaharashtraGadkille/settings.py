@@ -77,23 +77,23 @@ WSGI_APPLICATION = 'MaharashtraGadkille.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-# 'default': {
-#     'ENGINE': 'django.db.backends.postgresql',
-#     'NAME': 'd74aoichurclf2',
-#     'USER': 'tfzfznjyozfmyl',
-#     'PASSWORD': 'a8f74c8bb6093c3250aa13a8a42dc5b7a2999ac4ac737d233553236955b99469',
-#     'HOST': 'ec2-54-159-22-90.compute-1.amazonaws.com',
-#     'PORT': '5432',
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'd9ck36mtbjfcc5',
+    'USER': 'fpcelnychhuqpk',
+    'PASSWORD': '1fcd4696ca6838f2572dd05de269cbb9d24607623b846f1d8118fdefa7bf5358',
+    'HOST': 'ec2-44-209-186-51.compute-1.amazonaws.com',
+    'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
