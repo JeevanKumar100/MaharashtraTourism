@@ -13,6 +13,9 @@ class HomeBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.heading
+    class Meta: 
+        verbose_name = "Home Background"
+        verbose_name_plural = "Home Background"
 @receiver(post_delete, sender=HomeBackground)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
@@ -63,6 +66,9 @@ class SuccessfulTreks(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.title
+    class Meta: 
+        verbose_name = "Successful Trek"
+        verbose_name_plural = "Successful Treks"
 @receiver(post_delete, sender=SuccessfulTreks)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
@@ -95,7 +101,11 @@ def post_del_result(sender, instance, *args, **kwargs):
 class AboutUs(models.Model):
     heading = models.CharField(max_length=200)
     detail = models.TextField()
-    
+    def __str__(self):
+        return self.heading
+    class Meta: 
+        verbose_name = "About US"
+        verbose_name_plural = "About US"
 
 class TeamMember(models.Model):
     name = models.CharField(max_length=200)
