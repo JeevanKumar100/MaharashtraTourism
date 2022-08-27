@@ -46,6 +46,8 @@ class BestClick(models.Model):
     happytourist = models.PositiveIntegerField()
     placeexplored = models.PositiveIntegerField()
     image = models.ImageField(upload_to='gadkille/images/')
+    def __str__(self):
+        return self.title
 @receiver(post_delete, sender=BestClick)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
@@ -100,6 +102,8 @@ class TeamMember(models.Model):
     detail = models.TextField()
     designation = models.CharField(max_length=200)
     image = models.ImageField(upload_to='gadkille/images/')
+    def __str__(self):
+        return self.name
 @receiver(post_delete, sender=TeamMember)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
@@ -109,14 +113,33 @@ def post_del_result(sender, instance, *args, **kwargs):
 
 
 class DestinationBackground(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')
-    
+    image = models.ImageField(upload_to='gadkille/images/')  
 @receiver(post_delete, sender=DestinationBackground)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
         instance.image.delete()
     except:
         pass
+
+
+class Destination(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    rate = models.PositiveIntegerField()
+    day = models.PositiveIntegerField()
+    night = models.PositiveIntegerField()
+    image = models.ImageField(upload_to='gadkille/images/')
+    def __str__(self):
+        return self.title
+@receiver(post_delete, sender=Destination)
+def post_del_result(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+    except:
+        pass    
+
+
 
 
 class ContactBackground(models.Model):

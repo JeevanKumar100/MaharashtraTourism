@@ -1,6 +1,7 @@
+from multiprocessing import context
 from django.shortcuts import render
 
-from gadkille.models import AboutBackground, AboutUs, BestClick, FeedBack, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, BestClick, Destination, DestinationBackground, FeedBack, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
 
 
 # Create your views here.
@@ -36,7 +37,15 @@ def about(request):
     return render(request,'about.html',context)
 
 def destination(request):
-    return render(request,'destination.html')
+    destinationbackground = DestinationBackground.objects.all().last()
+    destinations = Destination.objects.all()
+
+    context = {
+        'destinationbackground' : destinationbackground,
+        'destinations' : destinations,
+    }
+
+    return render(request,'destination.html',context)
 
 def gallery(request):
     return render(request,'gallery.html')
