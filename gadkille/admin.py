@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from gadkille.models import BestClick, FeedBack, HomeBackground, SuccessfulTreks, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, BestClick, FeedBack, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
 
 # Register your models here.
 admin.site.register(HomeBackground)
@@ -8,3 +8,7 @@ admin.site.register(UpcomingTreks)
 admin.site.register(BestClick)
 admin.site.register(SuccessfulTreks)
 admin.site.register(FeedBack)
+
+admin.site.register(AboutBackground)
+admin.site.register(AboutUs)
+admin.site.register(TeamMember)
