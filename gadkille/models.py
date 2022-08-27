@@ -154,7 +154,6 @@ def post_del_result(sender, instance, *args, **kwargs):
 
 class ContactBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
-
 @receiver(post_delete, sender=ContactBackground)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
@@ -163,4 +162,22 @@ def post_del_result(sender, instance, *args, **kwargs):
         pass
 
 
+class ContactDetail(models.Model):
+    address = models.TextField()
+    contactno = models.PositiveBigIntegerField(max_length=10)
+    email = models.EmailField()
+    website = models.URLField()
+    def __str__(self):
+        return self.address
 
+
+class CustomerContact(models.Model):
+    name = models.CharField(max_length=200)
+    mobile = models.PositiveBigIntegerField(max_length=10)
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    def __str__(self):
+        return self.name
+    class Meta: 
+        verbose_name = "Customer Contact"
+        verbose_name_plural = "Customer Contact"

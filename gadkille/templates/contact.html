@@ -2,13 +2,13 @@
 
 {% block content %}
     
-    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('{{contactbackground.image.url}}');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
           <div class="col-md-9 ftco-animate pb-5 text-center">
             <h1 class="mb-3 bread">Contact Us</h1>
-            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact us <i class="ion-ios-arrow-forward"></i></span></p>
+            <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'index' %}">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact us <i class="ion-ios-arrow-forward"></i></span></p>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
           			<span class="icon-map-signs"></span>
           		</div>
           		<h3 class="mb-2">Address</h3>
-	            <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+	            <p>{{contactdetail.address}}</p>
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
@@ -32,7 +32,7 @@
           			<span class="icon-phone2"></span>
           		</div>
           		<h3 class="mb-2">Contact Number</h3>
-	            <p><a href="tel://1234567920">+ 1235 2355 98</a></p>
+	            <p><a href="tel:{{contactdetail.contactno}}">{{contactdetail.contactno}}</a></p>
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
@@ -41,7 +41,7 @@
           			<span class="icon-paper-plane"></span>
           		</div>
           		<h3 class="mb-2">Email Address</h3>
-	            <p><a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+	            <p><a href="mailto:{{contactdetail.email}}">{{contactdetail.email}}</a></p>
 	          </div>
           </div>
           <div class="col-md-3 d-flex">
@@ -50,29 +50,49 @@
           			<span class="icon-globe"></span>
           		</div>
           		<h3 class="mb-2">Website</h3>
-	            <p><a href="#">yoursite.com</a></p>
+	            <p><a href="https://{{contactdetail.website}}">{{contactdetail.website}}</a></p>
 	          </div>
           </div>
         </div>
       </div>
     </section>
 			
-		<section class="ftco-section contact-section">
+		<section id="contact_message" class="ftco-section contact-section">
       <div class="container">
+
+        {% if messages %}
+              <div class="alert alert-primary alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<div class="alert-icon">
+										<i data-feather="send"></i>
+									</div>
+									<div class="alert-message">
+                    <strong>
+										{% for message in messages  %}
+										{{message}}
+										{% endfor %}
+                  </strong> 
+                </div>
+              </div>
+        {% endif %}
+
         <div class="row block-9">
           <div class="col-md-6 order-md-last d-flex">
-            <form action="#" class="bg-light p-5 contact-form">
+            <form action="/savecontact" method="POST" class="bg-light p-5 contact-form">
+              {% csrf_token %}
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Name">
+                <input type="text" class="form-control" name="name" placeholder="Your Name" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Your Email">
+                <input type="text" class="form-control" name="mobile" placeholder="Your Mobile No" required>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Subject">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required> 
               </div>
               <div class="form-group">
-                <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                <textarea id="" cols="30" rows="7" class="form-control" name="message" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
                 <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">

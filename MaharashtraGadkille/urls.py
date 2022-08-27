@@ -27,6 +27,7 @@ urlpatterns = [
     path('destination/',views.destination,name="destination"),
     path('gallery/',views.gallery,name="gallery"),
     path('contact/',views.contact,name="contact"),
+    path('savecontact', views.savecontact,name='savecontact')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
