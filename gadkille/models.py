@@ -34,6 +34,9 @@ class UpcomingTreks(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.title
+    class Meta: 
+        verbose_name = "Upcoming Trek"
+        verbose_name_plural = "Upcoming Treks"
 @receiver(post_delete, sender=UpcomingTreks)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
@@ -77,13 +80,16 @@ def post_del_result(sender, instance, *args, **kwargs):
         pass
 
 
-class FeedBack(models.Model):
+class Feedback(models.Model):
     id = models.AutoField(primary_key=True)
     description = models.TextField()
     name = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
     def __str__(self):
         return self.name
+    class Meta: 
+        verbose_name = "Feedback"
+        verbose_name_plural = "Feedback"
 
 
 
@@ -106,6 +112,7 @@ class AboutUs(models.Model):
     class Meta: 
         verbose_name = "About US"
         verbose_name_plural = "About US"
+
 
 class TeamMember(models.Model):
     name = models.CharField(max_length=200)
@@ -152,6 +159,37 @@ def post_del_result(sender, instance, *args, **kwargs):
 
 
 
+class GalleryBackground(models.Model):
+    image = models.ImageField(upload_to='gadkille/images/')
+@receiver(post_delete, sender=GalleryBackground)
+def post_del_result(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+    except:
+        pass
+
+class Gallery(models.Model):
+    height_choices = (('h-2','h-2'),('h-3','h-3'),('h-4','h-4'))
+    width_choices = (('w-1','w-1'),('w-2','w-2'),('w-3','w-3'))
+    image = models.ImageField(upload_to='gadkille/images/')
+    height = models.CharField(max_length=5,choices=height_choices)
+    width = models.CharField(max_length=5,choices=width_choices)
+    location = models.CharField(max_length=30)
+    def __str__(self):
+        return self.location
+    class Meta: 
+        verbose_name = "Gallery"
+        verbose_name_plural = "Gallery"
+@receiver(post_delete, sender=Gallery)
+def post_del_result(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+    except:
+        pass
+
+
+
+
 class ContactBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
 @receiver(post_delete, sender=ContactBackground)
@@ -164,7 +202,7 @@ def post_del_result(sender, instance, *args, **kwargs):
 
 class ContactDetail(models.Model):
     address = models.TextField()
-    contactno = models.PositiveBigIntegerField(max_length=10)
+    contactno = models.PositiveBigIntegerField()
     email = models.EmailField()
     website = models.URLField()
     def __str__(self):
@@ -173,7 +211,7 @@ class ContactDetail(models.Model):
 
 class CustomerContact(models.Model):
     name = models.CharField(max_length=200)
-    mobile = models.PositiveBigIntegerField(max_length=10)
+    mobile = models.PositiveBigIntegerField()
     subject = models.CharField(max_length=200)
     message = models.TextField()
     def __str__(self):

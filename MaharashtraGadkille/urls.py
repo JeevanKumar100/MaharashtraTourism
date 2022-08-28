@@ -26,6 +26,7 @@ urlpatterns = [
     path('about/',views.about,name="about"),
     path('destination/',views.destination,name="destination"),
     path('gallery/',views.gallery,name="gallery"),
+    path('gallery1/',views.gallery1,name="gallery1"),
     path('contact/',views.contact,name="contact"),
     path('savecontact', views.savecontact,name='savecontact')
 ]

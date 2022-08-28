@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
-from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, ContactDetail, CustomerContact, Destination, DestinationBackground, FeedBack, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, ContactDetail, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
 
 
 # Create your views here.
@@ -12,7 +12,7 @@ def index(request):
     bestclick = BestClick.objects.all().last()
     successfultreks = SuccessfulTreks.objects.all()
     upcomingtreks = UpcomingTreks.objects.all()
-    feedbacks = FeedBack.objects.all()
+    feedbacks = Feedback.objects.all()
 
     context = {
         'homebackground':homebackground,
@@ -50,7 +50,26 @@ def destination(request):
     return render(request,'destination.html',context)
 
 def gallery(request):
-    return render(request,'gallery.html')
+    gallerybackground = GalleryBackground.objects.all().last()
+    photos = Gallery.objects.all()
+
+    context = {
+        'gallerybackground' : gallerybackground,
+        'photos' : photos,
+    }
+
+    return render(request,'gallery.html',context)
+
+def gallery1(request):
+    gallerybackground = GalleryBackground.objects.all().last()
+    photos = Gallery.objects.all()
+
+    context = {
+        'gallerybackground' : gallerybackground,
+        'photos' : photos,
+    }
+
+    return render(request,'gallery1.html',context)
 
 def contact(request):
     contactbackground = ContactBackground.objects.all().last()
@@ -81,5 +100,5 @@ def savecontact(request):
             messages.success(request,"Thank you "+ name +" for connecting with us..")
             return HttpResponseRedirect("/contact/#contact_message")
         except :
-            messages.error(request,"Something went wrong please try again")
+            messages.error(request,"Something went wrong, please check your details again")
             return HttpResponseRedirect("/contact/#contact_message")

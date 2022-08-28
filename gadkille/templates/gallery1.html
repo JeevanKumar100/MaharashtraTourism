@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+    <h1>CSS Grid gallery</h1>
+    <div class="g-container">
+    
+    {% for photo in photos %}
+    
+      <div class="gallery-container ">
+        <div class="gallery-item">
+          <div class="image">
+            <img src="{{photo.image.url}}" alt="cars">
+          </div>
+          <div class="text">{{photo.location}}</div>
+        </div>
+      </div>
+    
+    {% endfor %}
+    
+    </div>
+
+    {% endblock content %}
