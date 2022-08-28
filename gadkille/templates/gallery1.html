@@ -1,23 +1,160 @@
-{% extends 'base/base.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-{% block content %}
+    <style>
 
-    <h1>CSS Grid gallery</h1>
-    <div class="g-container">
-    
-    {% for photo in photos %}
-    
-      <div class="gallery-container ">
-        <div class="gallery-item">
-          <div class="image">
-            <img src="{{photo.image.url}}" alt="cars">
+      h1{
+        font-family: Satisfy;
+        font-size:50px;
+        text-align:center;
+        color:black;
+        padding:1%;
+      }
+      #gallery{
+        -webkit-column-count:4;
+        -moz-column-count:4;
+        column-count:4;
+        
+        -webkit-column-gap:20px;
+        -moz-column-gap:20px;
+        column-gap:20px;
+      }
+      @media (max-width:1200px){
+        #gallery{
+        -webkit-column-count:3;
+        -moz-column-count:3;
+        column-count:3;
+          
+        -webkit-column-gap:20px;
+        -moz-column-gap:20px;
+        column-gap:20px;
+      }
+      }
+      @media (max-width:800px){
+        #gallery{
+        -webkit-column-count:2;
+        -moz-column-count:2;
+        column-count:2;
+          
+        -webkit-column-gap:20px;
+        -moz-column-gap:20px;
+        column-gap:20px;
+      }
+      }
+      @media (max-width:600px){
+        #gallery{
+        -webkit-column-count:1;
+        -moz-column-count:1;
+        column-count:1;
+      }  
+      }
+      #gallery img,#gallery video {
+        width:100%;
+        height:auto;
+        margin: 4% auto;
+        box-shadow:-3px 5px 15px #000;
+        cursor: pointer;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+      }
+      .modal-img,.model-vid{
+        width:100%;
+        height:auto;
+      }
+      .modal-body{
+        padding:0px;
+      }
+
+      {% comment %} hover text css {% endcomment %}
+
+      .gallery-item{
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      .gallery-item .text{
+        opacity: 0;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        color: white;
+        font-size: 25px;
+        pointer-events: none;
+        z-index: 4;
+        transition: .3s ease-in-out;
+      }
+      
+      .gallery-item:hover .text{
+        opacity: 1;
+        color: white;
+        animation: move-down .3s linear;
+        padding: 1em;
+        width: 100%;
+      }
+      </style>
+
+  </head>
+  <body>
+
+    <h1>Maharashtra Gadkille Gallery</h1><hr>
+    <div id="gallery" class="container-fluid">  
+      
+      {% for photo in photos %}
+      
+          <div class="gallery-item">
+            <div class="image">
+              <img src="{{photo.image.url}}" class="img-responsive" alt="{{photo.location}}">
+            </div>
+            <div class="text">{{photo.location}}</div>
           </div>
-          <div class="text">{{photo.location}}</div>
+      
+      {% endfor %}
+          
+    </div>
+    
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-body">
+          </div>
         </div>
+    
       </div>
-    
-    {% endfor %}
-    
     </div>
 
-    {% endblock content %}
+    <script>
+
+      $(document).ready(function(){
+        $("img").click(function(){
+        var t = $(this).attr("src");
+        $(".modal-body").html("<img src='"+t+"' class='modal-img'>");
+        $("#myModal").modal();
+      });
+      
+      $("video").click(function(){
+        var v = $("video > source");
+        var t = v.attr("src");
+        $(".modal-body").html("<video class='model-vid' controls><source src='"+t+"' type='video/mp4'></source></video>");
+        $("#myModal").modal();  
+      });
+      });//EOF Document.ready
+      
+      </script>
+
+  </body>
+</html>
