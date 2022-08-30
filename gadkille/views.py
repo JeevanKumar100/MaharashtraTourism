@@ -62,7 +62,7 @@ def gallery(request):
 
 def gallery1(request):
     gallerybackground = GalleryBackground.objects.all().last()
-    photos = Gallery.objects.all()
+    photos = Gallery.objects.all().order_by('?')
 
     context = {
         'gallerybackground' : gallerybackground,
