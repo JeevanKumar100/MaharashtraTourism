@@ -5,6 +5,28 @@ from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackgrou
 
 class ExportContact(ImportExportMixin, admin.ModelAdmin):
     list_display = ['name', 'mobile', 'subject', 'message']
+from django.contrib import admin
+
+from . import models
+
+class AdminInfo(admin.ModelAdmin):
+    
+    actions = ['delete_model']
+
+    def delete_queryset(self, request, queryset):
+        
+        for instance in queryset:
+            try:
+                instance.image.delete()
+                instance.file.delete()
+            except:
+                pass
+
+        queryset.delete()
+     
+    def delete_model(self, request, obj):
+        
+        obj.delete()
 
 
 # Register your models here.

@@ -2,20 +2,20 @@ from pyexpat import model
 from unicodedata import name
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete,pre_delete
 
 from django.core.exceptions import ValidationError
 
 
 # Create your models here. 
-class ValidateSize():
 
+#Class to validate the file size
+class ValidateSize():
     def validate_1MB(fieldfile_obj):
             filesize = fieldfile_obj.file.size
             megabyte_limit = 1.0
             if filesize > megabyte_limit*1024*1024:
                 raise ValidationError("Max file size is %s MB" % str(megabyte_limit))
-
     def validate_2MB(fieldfile_obj):
             filesize = fieldfile_obj.file.size
             megabyte_limit = 2.0
@@ -32,12 +32,12 @@ class HomeBackground(models.Model):
     class Meta: 
         verbose_name = "Home Background"
         verbose_name_plural = "Home Background"
-@receiver(post_delete, sender=HomeBackground)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
+# @receiver(post_delete, sender=HomeBackground)
+# def post_del_result(sender, instance, *args, **kwargs):
+#     try:
+#         instance.image.delete()
+#     except:
+#         pass
 
 
 class UpcomingTreks(models.Model,ValidateSize):
@@ -54,13 +54,13 @@ class UpcomingTreks(models.Model,ValidateSize):
     class Meta: 
         verbose_name = "Upcoming Trek"
         verbose_name_plural = "Upcoming Treks"
-@receiver(post_delete, sender=UpcomingTreks)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-        instance.file.delete()
-    except:
-        pass
+# @receiver(pre_delete, sender=UpcomingTreks)
+# def pre_del_result(sender, instance, *args, **kwargs):
+#     try:
+#         instance.image.delete()
+#         instance.file.delete()
+#     except:
+#         pass
     
 
 class BestClick(models.Model):
@@ -90,12 +90,12 @@ class SuccessfulTreks(models.Model):
     class Meta: 
         verbose_name = "Successful Trek"
         verbose_name_plural = "Successful Treks"
-@receiver(post_delete, sender=SuccessfulTreks)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
+# @receiver(post_delete, sender=SuccessfulTreks)
+# def post_del_result(sender, instance, *args, **kwargs):
+#     try:
+#         instance.image.delete()
+#     except:
+#         pass
 
 
 class Feedback(models.Model):
@@ -114,7 +114,7 @@ class Feedback(models.Model):
 
 class AboutBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
-@receiver(post_delete, sender=AboutBackground)
+@receiver(pre_delete, sender=AboutBackground)
 def post_del_result(sender, instance, *args, **kwargs):
     try:
         instance.image.delete()
@@ -240,3 +240,20 @@ class CustomerContact(models.Model):
     class Meta: 
         verbose_name = "Customer Contact"
         verbose_name_plural = "Customer Contact"
+
+
+
+
+#####
+
+def model_pre_delete_handler(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+        instance.file.delete()
+    except:
+        pass
+
+MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground,SuccessfulTreks,Feedback]
+
+for model in MODELS_TO_BE_PRE_DELETE_HANDLED:
+    pre_delete.connect(model_pre_delete_handler, sender=model)
