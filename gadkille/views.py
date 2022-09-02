@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
-from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, ContactDetail, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
 
 
 # Create your views here.
@@ -73,11 +73,9 @@ def gallery1(request):
 
 def contact(request):
     contactbackground = ContactBackground.objects.all().last()
-    contactdetail = ContactDetail.objects.all().last()
 
     context = {
         'contactbackground' : contactbackground,
-        'contactdetail' : contactdetail,
     }
 
     return render(request,'contact.html',context)

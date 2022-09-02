@@ -4,7 +4,23 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_delete
 
+from django.core.exceptions import ValidationError
+
+
 # Create your models here. 
+class ValidateSize():
+
+    def validate_1MB(fieldfile_obj):
+            filesize = fieldfile_obj.file.size
+            megabyte_limit = 1.0
+            if filesize > megabyte_limit*1024*1024:
+                raise ValidationError("Max file size is %s MB" % str(megabyte_limit))
+
+    def validate_2MB(fieldfile_obj):
+            filesize = fieldfile_obj.file.size
+            megabyte_limit = 2.0
+            if filesize > megabyte_limit*1024*1024:
+                raise ValidationError("Max file size is %s MB" % str(megabyte_limit))
 
 class HomeBackground(models.Model):
     heading = models.CharField(max_length=150)
@@ -24,14 +40,15 @@ def post_del_result(sender, instance, *args, **kwargs):
         pass
 
 
-class UpcomingTreks(models.Model):
+class UpcomingTreks(models.Model,ValidateSize):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     rate = models.PositiveIntegerField()
     day = models.PositiveIntegerField()
     night = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_1MB])
+    file = models.FileField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
     def __str__(self):
         return self.title
     class Meta: 
@@ -41,6 +58,7 @@ class UpcomingTreks(models.Model):
 def post_del_result(sender, instance, *args, **kwargs):
     try:
         instance.image.delete()
+        instance.file.delete()
     except:
         pass
     
@@ -168,12 +186,24 @@ def post_del_result(sender, instance, *args, **kwargs):
     except:
         pass
 
-class Gallery(models.Model):
-    height_choices = (('h-2','h-2'),('h-3','h-3'),('h-4','h-4'))
-    width_choices = (('w-1','w-1'),('w-2','w-2'),('w-3','w-3'))
+class TrekPhoto(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
-    height = models.CharField(max_length=5,choices=height_choices)
-    width = models.CharField(max_length=5,choices=width_choices)
+    location = models.CharField(max_length=30)
+    def __str__(self):
+        return self.location
+    class Meta: 
+        verbose_name = "TrekPhoto"
+        verbose_name_plural = "TrekPhotos"
+@receiver(post_delete, sender=TrekPhoto)
+def post_del_result(sender, instance, *args, **kwargs):
+    try:
+        instance.image.delete()
+    except:
+        pass
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='gadkille/images/')
     location = models.CharField(max_length=30)
     def __str__(self):
         return self.location
@@ -198,15 +228,6 @@ def post_del_result(sender, instance, *args, **kwargs):
         instance.image.delete()
     except:
         pass
-
-
-class ContactDetail(models.Model):
-    address = models.TextField()
-    contactno = models.PositiveBigIntegerField()
-    email = models.EmailField()
-    website = models.URLField()
-    def __str__(self):
-        return self.address
 
 
 class CustomerContact(models.Model):
