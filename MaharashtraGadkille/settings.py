@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3tn(sltkh$mz&#tth_)ik_uvx7vs4pt0jqvgm56x82dtsd4ut9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['maharashtragadkille.herokuapp.com']
+ALLOWED_HOSTS = ['maharashtragadkille.com']
 
 
 # Application definition
@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,23 +77,23 @@ WSGI_APPLICATION = 'MaharashtraGadkille.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'd9ck36mtbjfcc5',
-    'USER': 'fpcelnychhuqpk',
-    'PASSWORD': '1fcd4696ca6838f2572dd05de269cbb9d24607623b846f1d8118fdefa7bf5358',
-    'HOST': 'ec2-44-209-186-51.compute-1.amazonaws.com',
-    'PORT': '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+# 'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': 'd9ck36mtbjfcc5',
+#     'USER': 'fpcelnychhuqpk',
+#     'PASSWORD': '1fcd4696ca6838f2572dd05de269cbb9d24607623b846f1d8118fdefa7bf5358',
+#     'HOST': 'ec2-44-209-186-51.compute-1.amazonaws.com',
+#     'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -130,7 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
