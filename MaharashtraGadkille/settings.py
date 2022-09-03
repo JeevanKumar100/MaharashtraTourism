@@ -135,7 +135,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # AWS_ACCESS_KEY_ID = 'AKIAWMXVBFVDC3QIC6NE'
 # AWS_SECRET_ACCESS_KEY = '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'
