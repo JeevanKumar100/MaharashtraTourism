@@ -175,6 +175,14 @@ def model_pre_delete_handler(sender, instance, *args, **kwargs):
     except:
         pass
 
+def model_pre_save_handler(sender,instance,*args,**kwargs):
+    try:
+        av = sender.objects.get(id=instance.id)
+        if av.image != instance.image:
+            av.image.delete()
+    except:
+        pass
+
 MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground, UpcomingTreks, BestClick, SuccessfulTreks, AboutBackground, TeamMember, DestinationBackground, Destination, GalleryBackground, TrekPhoto, Gallery, ContactBackground]
 
 for model in MODELS_TO_BE_PRE_DELETE_HANDLED:
