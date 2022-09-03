@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'import_export',
-    'storages',
 
     'gadkille',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -145,9 +145,9 @@ AWS_STORAGE_BUCKET_NAME = 'maharashtragadkille'
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 AWS_S3_REGION_NAME = "ap-south-1"
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = 'public-read'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
+STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
