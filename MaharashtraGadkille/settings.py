@@ -137,14 +137,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-# AWS_ACCESS_KEY_ID = 'AKIAWMXVBFVDC3QIC6NE'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'kcc123'
-# AWS_S3_SIGNATURE_VERSION = "s3v4"
-# AWS_S3_REGION_NAME = "ap-south-1"
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = 'AKIAQTHU6TXE5VWRMPCP'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'maharashtragadkille'
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+AWS_S3_REGION_NAME = "ap-south-1"
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
