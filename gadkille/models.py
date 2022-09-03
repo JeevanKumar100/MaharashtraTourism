@@ -32,12 +32,6 @@ class HomeBackground(models.Model):
     class Meta: 
         verbose_name = "Home Background"
         verbose_name_plural = "Home Background"
-# @receiver(post_delete, sender=HomeBackground)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
 
 
 class UpcomingTreks(models.Model,ValidateSize):
@@ -54,13 +48,6 @@ class UpcomingTreks(models.Model,ValidateSize):
     class Meta: 
         verbose_name = "Upcoming Trek"
         verbose_name_plural = "Upcoming Treks"
-# @receiver(pre_delete, sender=UpcomingTreks)
-# def pre_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#         instance.file.delete()
-#     except:
-#         pass
     
 
 class BestClick(models.Model):
@@ -72,12 +59,6 @@ class BestClick(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.title
-@receiver(post_delete, sender=BestClick)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
 
 
 class SuccessfulTreks(models.Model):
@@ -90,12 +71,6 @@ class SuccessfulTreks(models.Model):
     class Meta: 
         verbose_name = "Successful Trek"
         verbose_name_plural = "Successful Treks"
-# @receiver(post_delete, sender=SuccessfulTreks)
-# def post_del_result(sender, instance, *args, **kwargs):
-#     try:
-#         instance.image.delete()
-#     except:
-#         pass
 
 
 class Feedback(models.Model):
@@ -110,16 +85,8 @@ class Feedback(models.Model):
         verbose_name_plural = "Feedback"
 
 
-
-
 class AboutBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
-@receiver(pre_delete, sender=AboutBackground)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
 
     
 class AboutUs(models.Model):
@@ -139,22 +106,10 @@ class TeamMember(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.name
-@receiver(post_delete, sender=TeamMember)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
 
 
 class DestinationBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')  
-@receiver(post_delete, sender=DestinationBackground)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
 
 
 class Destination(models.Model):
@@ -167,24 +122,11 @@ class Destination(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
     def __str__(self):
         return self.title
-@receiver(post_delete, sender=Destination)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass    
-
-
 
 
 class GalleryBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
-@receiver(post_delete, sender=GalleryBackground)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
+
 
 class TrekPhoto(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
@@ -194,12 +136,6 @@ class TrekPhoto(models.Model):
     class Meta: 
         verbose_name = "TrekPhoto"
         verbose_name_plural = "TrekPhotos"
-@receiver(post_delete, sender=TrekPhoto)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
 
 
 class Gallery(models.Model):
@@ -210,24 +146,10 @@ class Gallery(models.Model):
     class Meta: 
         verbose_name = "Gallery"
         verbose_name_plural = "Gallery"
-@receiver(post_delete, sender=Gallery)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
-
-
 
 
 class ContactBackground(models.Model):
     image = models.ImageField(upload_to='gadkille/images/')
-@receiver(post_delete, sender=ContactBackground)
-def post_del_result(sender, instance, *args, **kwargs):
-    try:
-        instance.image.delete()
-    except:
-        pass
 
 
 class CustomerContact(models.Model):
@@ -244,7 +166,7 @@ class CustomerContact(models.Model):
 
 
 
-#####
+##------- Handler configurations for models ----------
 
 def model_pre_delete_handler(sender, instance, *args, **kwargs):
     try:
@@ -253,7 +175,7 @@ def model_pre_delete_handler(sender, instance, *args, **kwargs):
     except:
         pass
 
-MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground,SuccessfulTreks,Feedback]
+MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground, UpcomingTreks, BestClick, SuccessfulTreks, AboutBackground, TeamMember, DestinationBackground, Destination, GalleryBackground, TrekPhoto, Gallery, ContactBackground]
 
 for model in MODELS_TO_BE_PRE_DELETE_HANDLED:
     pre_delete.connect(model_pre_delete_handler, sender=model)
