@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
-from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, TrekPhoto, UpcomingTreks
 
 
 # Create your views here.
@@ -51,7 +51,7 @@ def destination(request):
 
 def gallery(request):
     gallerybackground = GalleryBackground.objects.all().last()
-    photos = Gallery.objects.all()
+    photos = TrekPhoto.objects.all()
 
     context = {
         'gallerybackground' : gallerybackground,
@@ -61,11 +61,9 @@ def gallery(request):
     return render(request,'gallery.html',context)
 
 def gallery1(request):
-    gallerybackground = GalleryBackground.objects.all().last()
     photos = Gallery.objects.all().order_by('?')
 
     context = {
-        'gallerybackground' : gallerybackground,
         'photos' : photos,
     }
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>MaharashtraGadkille|Gallery</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
    
@@ -20,6 +20,12 @@
         font-size:50px;
         text-align:center;
         color:black;
+        padding:1%;
+      }
+      a{
+        text-decoration:none;
+        text-align:center;
+        margin:1%;
         padding:1%;
       }
       #gallery{
@@ -109,7 +115,9 @@
   </head>
   <body>
 
-    <h1>Maharashtra Gadkille Gallery</h1><hr>
+    <h1>Maharashtra Gadkille Gallery</h1> <a href="{% url 'index' %}">Home</a>
+    <hr>
+
     <div id="gallery" class="container-fluid">  
       
       {% for photo in photos %}
