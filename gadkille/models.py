@@ -2,7 +2,7 @@ from pyexpat import model
 from unicodedata import name
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import post_delete,pre_delete
+from django.db.models.signals import pre_delete,pre_save
 
 from django.core.exceptions import ValidationError
 
@@ -21,12 +21,17 @@ class ValidateSize():
             megabyte_limit = 2.0
             if filesize > megabyte_limit*1024*1024:
                 raise ValidationError("Max file size is %s MB" % str(megabyte_limit))
+    def validate_3MB(fieldfile_obj):
+            filesize = fieldfile_obj.file.size
+            megabyte_limit = 3.0
+            if filesize > megabyte_limit*1024*1024:
+                raise ValidationError("Max file size is %s MB" % str(megabyte_limit))
 
 class HomeBackground(models.Model):
     heading = models.CharField(max_length=150)
     subheading = models.CharField(max_length=200)
     link = models.URLField()
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_3MB])
     def __str__(self):
         return self.heading
     class Meta: 
@@ -34,15 +39,15 @@ class HomeBackground(models.Model):
         verbose_name_plural = "Home Background"
 
 
-class UpcomingTreks(models.Model,ValidateSize):
+class UpcomingTreks(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     rate = models.PositiveIntegerField()
     day = models.PositiveIntegerField()
     night = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_1MB])
-    file = models.FileField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
+    file = models.FileField(upload_to='gadkille/files/',validators=[ValidateSize.validate_2MB])
     def __str__(self):
         return self.title
     class Meta: 
@@ -56,7 +61,7 @@ class BestClick(models.Model):
     successfultours = models.PositiveIntegerField()
     happytourist = models.PositiveIntegerField()
     placeexplored = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
     def __str__(self):
         return self.title
 
@@ -65,7 +70,7 @@ class SuccessfulTreks(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     trekcount = models.IntegerField()
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
     def __str__(self):
         return self.title
     class Meta: 
@@ -86,7 +91,7 @@ class Feedback(models.Model):
 
 
 class AboutBackground(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_3MB])
 
     
 class AboutUs(models.Model):
@@ -103,13 +108,13 @@ class TeamMember(models.Model):
     name = models.CharField(max_length=200)
     detail = models.TextField()
     designation = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_1MB])
     def __str__(self):
         return self.name
 
 
 class DestinationBackground(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')  
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_3MB])  
 
 
 class Destination(models.Model):
@@ -119,17 +124,17 @@ class Destination(models.Model):
     rate = models.PositiveIntegerField()
     day = models.PositiveIntegerField()
     night = models.PositiveIntegerField()
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
     def __str__(self):
         return self.title
 
 
 class GalleryBackground(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_3MB])
 
 
 class TrekPhoto(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
     location = models.CharField(max_length=30)
     def __str__(self):
         return self.location
@@ -139,7 +144,7 @@ class TrekPhoto(models.Model):
 
 
 class Gallery(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_2MB])
     location = models.CharField(max_length=30)
     def __str__(self):
         return self.location
@@ -149,7 +154,7 @@ class Gallery(models.Model):
 
 
 class ContactBackground(models.Model):
-    image = models.ImageField(upload_to='gadkille/images/')
+    image = models.ImageField(upload_to='gadkille/images/',validators=[ValidateSize.validate_3MB])
 
 
 class CustomerContact(models.Model):
@@ -177,9 +182,11 @@ def model_pre_delete_handler(sender, instance, *args, **kwargs):
 
 def model_pre_save_handler(sender,instance,*args,**kwargs):
     try:
-        av = sender.objects.get(id=instance.id)
-        if av.image != instance.image:
-            av.image.delete()
+        available_object = sender.objects.get(id=instance.id)
+        if available_object.image != instance.image:
+            available_object.image.delete()
+        if available_object.file != instance.file:
+            available_object.file.delete()
     except:
         pass
 
@@ -187,3 +194,4 @@ MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground, UpcomingTreks, BestClick, Suc
 
 for model in MODELS_TO_BE_PRE_DELETE_HANDLED:
     pre_delete.connect(model_pre_delete_handler, sender=model)
+    pre_save.connect(model_pre_save_handler,sender=model)
