@@ -1,7 +1,7 @@
 from django.contrib import admin
 from import_export.admin import ImportExportMixin
 
-from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, TrekPhoto, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, Activity, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, TeamMember, TrekPhoto, UpcomingTreks
 
 class ExportContact(ImportExportMixin, admin.ModelAdmin):
     list_display = ['name', 'mobile', 'subject', 'message']
@@ -11,7 +11,7 @@ class ExportContact(ImportExportMixin, admin.ModelAdmin):
 admin.site.register(HomeBackground)
 admin.site.register(UpcomingTreks)
 admin.site.register(BestClick)
-admin.site.register(SuccessfulTreks)
+admin.site.register(Activity)
 admin.site.register(Feedback)
 
 admin.site.register(AboutBackground)

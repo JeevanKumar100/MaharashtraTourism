@@ -42,7 +42,8 @@ class HomeBackground(models.Model):
 class UpcomingTreks(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    location = models.CharField(max_length=200)
+    start_date = models.DateField()
+    end_date = models.DateField()
     rate = models.PositiveIntegerField()
     day = models.PositiveIntegerField()
     night = models.PositiveIntegerField()
@@ -66,7 +67,7 @@ class BestClick(models.Model):
         return self.title
 
 
-class SuccessfulTreks(models.Model):
+class Activity(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     trekcount = models.IntegerField()
@@ -74,8 +75,8 @@ class SuccessfulTreks(models.Model):
     def __str__(self):
         return self.title
     class Meta: 
-        verbose_name = "Successful Trek"
-        verbose_name_plural = "Successful Treks"
+        verbose_name = "Activity"
+        verbose_name_plural = "Activities"
 
 
 class Feedback(models.Model):
@@ -139,8 +140,8 @@ class TrekPhoto(models.Model):
     def __str__(self):
         return self.location
     class Meta: 
-        verbose_name = "TrekPhoto"
-        verbose_name_plural = "TrekPhotos"
+        verbose_name = "Trek Photo"
+        verbose_name_plural = "Trek Photos"
 
 
 class Gallery(models.Model):
@@ -190,7 +191,7 @@ def model_pre_save_handler(sender,instance,*args,**kwargs):
     except:
         pass
 
-MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground, UpcomingTreks, BestClick, SuccessfulTreks, AboutBackground, TeamMember, DestinationBackground, Destination, GalleryBackground, TrekPhoto, Gallery, ContactBackground]
+MODELS_TO_BE_PRE_DELETE_HANDLED = [HomeBackground, UpcomingTreks, BestClick, Activity, AboutBackground, TeamMember, DestinationBackground, Destination, GalleryBackground, TrekPhoto, Gallery, ContactBackground]
 
 for model in MODELS_TO_BE_PRE_DELETE_HANDLED:
     pre_delete.connect(model_pre_delete_handler, sender=model)

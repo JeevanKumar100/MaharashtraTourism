@@ -4,8 +4,8 @@
 
 {% block content %}
 
-  <div class="hero-wrap js-fullheight" style="background-image: url({{homebackground.image.url}});" data-stellar-background-ratio="0.5">
-      <div class="overlay"></div>
+  <div class="hero-wrap js-fullheight" style="background-image: url({{homebackground.image.url}}); background-attachment: fixed;" >
+      {% comment %} <div class="overlay"></div> {% endcomment %}
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 text text-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
@@ -37,13 +37,12 @@
               <a class="img" style="background-image: url({{upcomingtrek.image.url}});"></a>
               <div class="text p-4">
                   <span class="price">{{upcomingtrek.rate}}/person</span>
-                  <span class="days">8 Days Tour</span>
+                  <span class="days">{{upcomingtrek.start_date | date:"d M" }} - {{upcomingtrek.end_date | date:"d M" }}</span> 
                   <h3><a>{{upcomingtrek.title}}</a></h3>
-                  <p class="location"><span class="ion-ios-map"></span> {{upcomingtrek.location}}</p>
+                  <p class="location"><span class="ion-ios-map"></span> <a href="{{upcomingtrek.file.url}}" target="_blank">Itinerary</a></p>
                   <ul>
                       <li><span class="flaticon-shower"></span>{{upcomingtrek.day}} day</li>
                       <li><span class="flaticon-king-size"></span>{{upcomingtrek.night}} night</li>
-                      <li><span class="flaticon-route"></span><a href="{{upcomingtrek.file.url}}" target="_blank">Itinerary</a></li>
                   </ul>
               </div>
           </div>
@@ -106,19 +105,19 @@
       <div class="container">
           <div class="row justify-content-center pb-4">
         <div class="col-md-12 heading-section text-center ftco-animate">
-          <h2 class="mb-4">Destination</h2>
+          <h2 class="mb-4">Activities</h2>
         </div>
       </div>
       <div class="row">
           
-        {% for successfultrek in successfultreks %}
+        {% for activity in activities %}
 
           <div class="col-md-3 ftco-animate">
               <div class="project-destination">
-                  <a href="#" class="img" style="background-image: url({{successfultrek.image.url}});">
+                  <a href="#" class="img" style="background-image: url({{activity.image.url}});">
                       <div class="text">
-                          <h3>{{successfultrek.title}}</h3>
-                          <span>{{successfultrek.trekcount}}Tours</span>
+                          <h3>{{activity.title}}</h3>
+                          <span>{{activity.trekcount}}Tours</span>
                       </div>
                   </a>
               </div>

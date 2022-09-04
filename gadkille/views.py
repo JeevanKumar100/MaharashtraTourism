@@ -3,21 +3,21 @@ from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 
-from gadkille.models import AboutBackground, AboutUs, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, SuccessfulTreks, TeamMember, TrekPhoto, UpcomingTreks
+from gadkille.models import AboutBackground, AboutUs, Activity, BestClick, ContactBackground, CustomerContact, Destination, DestinationBackground, Feedback, Gallery, GalleryBackground, HomeBackground, TeamMember, TrekPhoto, UpcomingTreks
 
 
 # Create your views here.
 def index(request):
     homebackground = HomeBackground.objects.all().last()
     bestclick = BestClick.objects.all().last()
-    successfultreks = SuccessfulTreks.objects.all()
+    activities = Activity.objects.all()
     upcomingtreks = UpcomingTreks.objects.all()
     feedbacks = Feedback.objects.all()
 
     context = {
         'homebackground':homebackground,
         'bestclick':bestclick,
-        'successfultreks':successfultreks,
+        'activities':activities,
         'upcomingtreks':upcomingtreks,
         'feedbacks':feedbacks,
                 
