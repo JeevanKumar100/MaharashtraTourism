@@ -58,7 +58,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-  'https://www.maharashtragadkille.com/'
+  'https://www.maharashtragadkille.com/',
+  'http://www.maharashtragadkille.com/'
 )
 
 ROOT_URLCONF = 'MaharashtraGadkille.urls'
