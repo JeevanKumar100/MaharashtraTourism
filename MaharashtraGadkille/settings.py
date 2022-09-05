@@ -145,6 +145,7 @@ AWS_S3_SIGNATURE_VERSION = "s3v4"
 AWS_S3_REGION_NAME = "ap-south-1"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
 STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
 
