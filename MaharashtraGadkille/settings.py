@@ -58,7 +58,7 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-  'https://maharashtragadkille.s3.amazonaws.com/*'
+  'https://maharashtragadkille.s3.amazonaws.com/*','https://www.maharashtragadkille.com'
 )
 
 ROOT_URLCONF = 'MaharashtraGadkille.urls'
