@@ -56,7 +56,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ORIGIN_WHITELIST = (
+CORS_ALLOWED_ORIGINS = (
   'https://www.maharashtragadkille.com',
   'http://www.maharashtragadkille.com',
   'https://maharashtragadkille.com',
