@@ -63,6 +63,13 @@ CORS_ALLOWED_ORIGINS = [
   'http://maharashtragadkille.com',
 ]
 
+CSRF_TRUSTED_ORIGINS=[
+    'https://www.maharashtragadkille.com',
+    'http://www.maharashtragadkille.com',
+    'https://maharashtragadkille.com',
+    'http://maharashtragadkille.com',
+    ]
+
 ROOT_URLCONF = 'MaharashtraGadkille.urls'
 
 TEMPLATES = [
