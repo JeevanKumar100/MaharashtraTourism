@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from pickle import TRUE
-
+from django.test import TestCase, override_settings
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -153,6 +153,11 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
 STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
+
+
+@override_settings(STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage')
+class MyTest(TestCase):
+    pass
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
