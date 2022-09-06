@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'import_export',
     'storages',
-    'gadkille',    
+    'gadkille', 
+    'corsheaders'   
 ]
 
 MIDDLEWARE = [
@@ -54,11 +55,11 @@ MIDDLEWARE = [
     # 'corsheaders.middleware.CorsMiddleware',
 ]
 
-# CORS_ORIGIN_ALLOW_ALL = False
-# CORS_ORIGIN_WHITELIST = (
-#   'https://www.maharashtragadkille.com',
-#   'http://www.maharashtragadkille.com'
-# )
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+  'https://www.maharashtragadkille.com',
+  'http://www.maharashtragadkille.com'
+)
 
 ROOT_URLCONF = 'MaharashtraGadkille.urls'
 
