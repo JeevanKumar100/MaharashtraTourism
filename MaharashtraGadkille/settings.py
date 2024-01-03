@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3tn(sltkh$mz&#tth_)ik_uvx7vs4pt0jqvgm56x82dtsd4ut9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['maharashtragadkille.com','3.111.205.50','www.maharashtragadkille.com']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -55,20 +55,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOWED_ORIGINS = [
-  'https://www.maharashtragadkille.com',
-  'http://www.maharashtragadkille.com',
-  'https://maharashtragadkille.com',
-  'http://maharashtragadkille.com',
-]
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOWED_ORIGINS = [
+#   'https://www.maharashtragadkille.com',
+#   'http://www.maharashtragadkille.com',
+#   'https://maharashtragadkille.com',
+#   'http://maharashtragadkille.com',
+# ]
 
-CSRF_TRUSTED_ORIGINS=[
-    'https://www.maharashtragadkille.com',
-    'http://www.maharashtragadkille.com',
-    'https://maharashtragadkille.com',
-    'http://maharashtragadkille.com',
-    ]
+# CSRF_TRUSTED_ORIGINS=[
+#     'https://www.maharashtragadkille.com',
+#     'http://www.maharashtragadkille.com',
+#     'https://maharashtragadkille.com',
+#     'http://maharashtragadkille.com',
+#     ]
 
 ROOT_URLCONF = 'MaharashtraGadkille.urls'
 
@@ -101,6 +101,7 @@ DATABASES = {
     }
 }
 
+###############Heroku
 # DATABASES = {
 # 'default': {
 #     'ENGINE': 'django.db.backends.postgresql',
@@ -111,6 +112,20 @@ DATABASES = {
 #     'PORT': '5432',
 #     }
 # }
+# To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
+
+##############Vercel
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'MaharashtraTourism',
+    'USER': 'omkar28399',
+    'PASSWORD': 'TC2c3vaMuGsI',
+    'HOST': 'ep-lively-union-64125674.ap-southeast-1.aws.neon.tech',
+    'PORT': '5432',
+    'OPTIONS': {'sslmode': 'require'},
+  }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
