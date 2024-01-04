@@ -115,17 +115,17 @@ WSGI_APPLICATION = 'MaharashtraGadkille.wsgi.application'
 # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
 
 ##############Vercel
-# DATABASES = {
-#   'default': {
-#     'ENGINE': 'django.db.backends.postgresql',
-#     'NAME': 'MaharashtraTourism',
-#     'USER': 'omkar28399',
-#     'PASSWORD': 'TC2c3vaMuGsI',
-#     'HOST': 'ep-lively-union-64125674.ap-southeast-1.aws.neon.tech',
-#     'PORT': '5432',
-#     'OPTIONS': {'sslmode': 'require'},
-#   }
-# }
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'MaharashtraTourism',
+    'USER': 'omkar28399',
+    'PASSWORD': 'TC2c3vaMuGsI',
+    'HOST': 'ep-lively-union-64125674.ap-southeast-1.aws.neon.tech',
+    'PORT': '5432',
+    'OPTIONS': {'sslmode': 'require'},
+  }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
