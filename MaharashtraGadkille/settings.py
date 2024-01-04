@@ -162,10 +162,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = 'media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
@@ -176,11 +176,11 @@ AWS_S3_SIGNATURE_VERSION = "s3v4"
 AWS_S3_REGION_NAME = "ap-south-1"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
-STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
+# DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
+# STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
 
 
-@override_settings(STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage')
+# @override_settings(STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage')
 class MyTest(TestCase):
     pass
 
