@@ -1,4 +1,4 @@
-"""MaharashtraGadkille URL Configuration
+"""MaharashtraTourism URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls.static import static
 
 from gadkille import views
-from MaharashtraGadkille import settings
+from MaharashtraTourism import settings
 urlpatterns = [
     path('dadmin/', admin.site.urls),
 
