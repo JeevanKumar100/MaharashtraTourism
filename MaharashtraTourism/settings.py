@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 from pickle import TRUE
 from django.test import TestCase, override_settings
@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3tn(sltkh$mz&#tth_)ik_uvx7vs4pt0jqvgm56x82dtsd4ut9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -109,17 +109,17 @@ DATABASES = {
 # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
 
 ##############Vercel
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql',
-    'NAME': 'MaharashtraTourism',
-    'USER': 'omkar28399',
-    'PASSWORD': 'TC2c3vaMuGsI',
-    'HOST': 'ep-lively-union-64125674.ap-southeast-1.aws.neon.tech',
-    'PORT': '5432',
-    'OPTIONS': {'sslmode': 'require'},
-  }
-}
+# DATABASES = {
+#   'default': {
+#     'ENGINE': 'django.db.backends.postgresql',
+#     'NAME': 'MaharashtraTourism',
+#     'USER': 'omkar28399',           
+#     'PASSWORD': 'TC2c3vaMuGsI',
+#     'HOST': 'ep-lively-union-64125674.ap-southeast-1.aws.neon.tech',
+#     'PORT': '5432',
+#     'OPTIONS': {'sslmode': 'require'},
+#   }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -155,6 +155,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+# Local
+
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
@@ -163,24 +165,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-# AWS_ACCESS_KEY_ID = 'AKIAQTHU6TXE5VWRMPCP'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'maharashtratourism'
-# AWS_S3_SIGNATURE_VERSION = "s3v4"
-# AWS_S3_REGION_NAME = "ap-south-1"
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-# DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
-# STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
-
-
-# @override_settings(STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage')
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Logging setting incase of errors over server
 
 # LOGGING = {
 #     'version': 1,
@@ -215,7 +207,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     }
 # }
 
-try:
-    from .local_settings import *
-except ImportError:
-    print('You are on production server')
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     print('You are on production server')
