@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3tn(sltkh$mz&#tth_)ik_uvx7vs4pt0jqvgm56x82dtsd4ut9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app','.now.sh']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'MaharashtraTourism.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 ###############Heroku
 # DATABASES = {
@@ -160,35 +160,19 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 
-#Vercel
-
-# STATIC_URL = 'static/'
-# STATIC_FILES_DIR = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build','static')
-
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
-# AWS_ACCESS_KEY_ID = 'AKIAQTHU6TXE5VWRMPCP'
-# AWS_SECRET_ACCESS_KEY = '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'
-# AWS_STORAGE_BUCKET_NAME = 'maharashtratourism'
-# AWS_S3_SIGNATURE_VERSION = "s3v4"
-# AWS_S3_REGION_NAME = "ap-south-1"
-# AWS_S3_FILE_OVERWRITE = False
-# AWS_DEFAULT_ACL = None
-# DEFAULT_FILE_STORAGE = 'gadkille.storage_backends.PublicMediaStorage'
-# STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage'
-
-
-# @override_settings(STATICFILES_STORAGE = 'gadkille.storage_backends.StaticStorage')
 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Logging setting incase of errors over server
 
 # LOGGING = {
 #     'version': 1,
@@ -223,7 +207,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     }
 # }
 
-try:
-    from .local_settings import *
-except ImportError:
-    print('You are on production server')
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     print('You are on production server')
