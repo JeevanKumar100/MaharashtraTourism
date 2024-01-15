@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3tn(sltkh$mz&#tth_)ik_uvx7vs4pt0jqvgm56x82dtsd4ut9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -86,12 +86,12 @@ WSGI_APPLICATION = 'MaharashtraTourism.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 ###############Heroku
 # DATABASES = {
@@ -113,7 +113,7 @@ DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.postgresql',
     'NAME': 'MaharashtraTourism',
-    'USER': 'omkar28399',
+    'USER': 'omkar28399',           
     'PASSWORD': 'TC2c3vaMuGsI',
     'HOST': 'ep-lively-union-64125674.ap-southeast-1.aws.neon.tech',
     'PORT': '5432',
