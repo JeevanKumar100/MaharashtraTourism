@@ -1,38 +1,19 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'master', url: 'https://github.com/JeevanKumar100/MaharashtraTourism.git'
-            }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    sh 'docker build -t tourism-app .'
-                }
-            }
-        }
-
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    sh 'docker stop tourism-app || true && docker rm tourism-app || true'
-                    sh 'docker run -d -p 8000:8000 --name tourism-app tourism-app'
-                }
-            }
-        }
+    environment {
+        // 👇 Change this to switch repo easily
+        GIT_REPO = "https://github.com/JeevanKumar100/MaharashtraTourism.git"
+        // GIT_REPO = "https://github.com/ursmaheshj/MaharashtraTourism.git"
     }
-}
-pipeline {
-    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/ursmaheshj/MaharashtraTourism.git'
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[url: "${GIT_REPO}"]]
+                ])
             }
         }
 
@@ -47,8 +28,11 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh 'docker stop tourism-app || true && docker rm tourism-app || true'
-                    sh 'docker run -d -p 8000:8000 --name tourism-app tourism-app'
+                    sh '''
+                        docker stop tourism-app || true
+                        docker rm tourism-app || true
+                        docker run -d -p 8000:8000 --name tourism-app tourism-app
+                    '''
                 }
             }
         }
